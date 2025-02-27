@@ -314,6 +314,7 @@ BigDecimal BigDecimal::operator-(const BigDecimal& other) const {
     BigDecimal result(0, std::max((*this).precision, other.precision));
 
     if ((*this).sign == other.sign) {
+        std::cout << "CHECK";
         if (compareMagnitude(other) >= 0) {
             result.bits = absolute_minus(a_bits, b_bits);
             result.sign = (*this).sign;

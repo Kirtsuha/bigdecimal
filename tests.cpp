@@ -14,6 +14,8 @@ bool testSubscription() {
     BigDecimal b ("3.25", 128);
     BigDecimal result = a + b;
     BigDecimal expected ("-2.75", 128);
+    std::cout << result.toString() << std::endl;
+    std::cout << expected.toString() << std::endl;
     return result == expected;
 }
 
@@ -28,7 +30,7 @@ void runTest(char* message, bool result) {
 }
 
 int main() {
-    //runTest("test addiction: ", testAddition());
+    runTest("test addiction: ", testAddition());
     runTest("test subscription: ", testSubscription());
     return 0;
 }
