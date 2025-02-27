@@ -2,21 +2,44 @@
 #include <iostream>
 
 bool testAddition() {
-    BigDecimal a ("10.5", 128);
-    BigDecimal b ("3.25", 128);
+    BigDecimal a (10, 128);
+    BigDecimal b ("3.75", 128);
     BigDecimal result = a + b;
     BigDecimal expected ("13.75", 128);
     return result == expected;
 }
 
 bool testSubscription() {
-    BigDecimal a ("0.5", 128);
-    BigDecimal b ("3.25", 128);
-    BigDecimal result = a + b;
+    BigDecimal a = 0.5_longnum;
+    BigDecimal b = 3.25_longnum;
+    BigDecimal result = a - b;
     BigDecimal expected ("-2.75", 128);
-    std::cout << result.toString() << std::endl;
-    std::cout << expected.toString() << std::endl;
     return result == expected;
+}
+
+bool testIsEqual() {
+    BigDecimal a ("133.55", 128);
+    BigDecimal b ("133.55", 128);
+    return a == b;
+}
+
+bool testIsLarger() {
+    BigDecimal a ("133.55", 128);
+    BigDecimal b ("-23423413.5123125", 128);
+    return a > b;
+}
+
+bool testIsLower() {
+    BigDecimal a ("133.55", 128);
+    BigDecimal b ("133.55001", 128);
+    return a < b;
+}
+
+bool testMultiply() {
+    BigDecimal a ("6.25", 2);
+    BigDecimal b("0.75", 2);
+    BigDecimal result = a * b;
+    return 1;
 }
 
 void runTest(char* message, bool result) {
@@ -32,5 +55,9 @@ void runTest(char* message, bool result) {
 int main() {
     runTest("test addiction: ", testAddition());
     runTest("test subscription: ", testSubscription());
+    runTest("test equalisation: ", testIsEqual());
+    runTest("test larger: ", testIsLarger());
+    runTest("test lower: ", testIsLower());
+    testMultiply() ;
     return 0;
 }

@@ -39,6 +39,7 @@ BigDecimal::BigDecimal(long double value, int precision) : precision(precision),
         }
         std::reverse(bits.begin(), bits.end());
         long double fractional = value - int(value);
+
         for (int i = 0; i < precision; i++) {
             fractional *= 2;
             bits.push_back(int(fractional));
@@ -252,14 +253,6 @@ std::vector<bool> absolute_minus(std::vector<bool> x, std::vector<bool> y) {
     int temp = 0;
 
     for (int i = 0; i < x.size(); i++) {
-        std::cout << x[i];
-    } std::cout << std::endl;
-
-    for (int i = 0; i < y.size(); i++) {
-        std::cout << y[i];
-    } std::cout << std::endl;
-
-    for (int i = 0; i < x.size(); i++) {
         if (borrow == 1) {
             if (x[i] == 0) {
                 temp = 1;
@@ -312,9 +305,7 @@ BigDecimal BigDecimal::operator-(const BigDecimal& other) const {
 
     equalize(&a_bits, &b_bits, (*this).precision, other.precision);
     BigDecimal result(0, std::max((*this).precision, other.precision));
-
     if ((*this).sign == other.sign) {
-        std::cout << "CHECK";
         if (compareMagnitude(other) >= 0) {
             result.bits = absolute_minus(a_bits, b_bits);
             result.sign = (*this).sign;
@@ -328,5 +319,23 @@ BigDecimal BigDecimal::operator-(const BigDecimal& other) const {
         result.sign = (*this).sign;
     }
     result.normalize();
+    return result;
+}
+
+//multiply operator
+BigDecimal BigDecimal::operator*(const BigDecimal& other) const {
+    BigDecimal temp = other;
+    temp.sign = 0;
+    temp.precision = precision + other.precision;
+    BigDecimal result (0,0);
+    std::vector<bool> trail = bits;
+    std::reverse(trail.begin(), trail.end());
+    for (int i = 0; i < trail.size(); i++) {
+        result = result + temp;
+        temp.precision--;
+        std::cout << result.toString() << std::endl;
+    }
+    result.precision = precision + other.precision;
+    result.sign = (sign != other.sign);
     return result;
 }

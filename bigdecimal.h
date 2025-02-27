@@ -29,7 +29,7 @@ public:
 
     BigDecimal operator+(const BigDecimal & other) const;
     BigDecimal operator-(const BigDecimal & other) const;
-    BigDecimal operator*(BigDecimal & other);
+    BigDecimal operator*(const BigDecimal & other) const;
     BigDecimal operator/(BigDecimal & other);
 
     int compareMagnitude(const BigDecimal& other) const;
