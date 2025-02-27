@@ -1,3 +1,6 @@
-C:/Users/Кирилл/Desktop/ВШЭ дз/АиАЯ/структуры тупорылые/bd/cmake-build-debug/CMakeFiles/bd.dir
+C:/Users/Кирилл/Desktop/ВШЭ дз/АиАЯ/структуры тупорылые/bd/cmake-build-debug/CMakeFiles/bigdecimal.dir
+C:/Users/Кирилл/Desktop/ВШЭ дз/АиАЯ/структуры тупорылые/bd/cmake-build-debug/CMakeFiles/tests.dir
+C:/Users/Кирилл/Desktop/ВШЭ дз/АиАЯ/структуры тупорылые/bd/cmake-build-debug/CMakeFiles/run-tests.dir
+C:/Users/Кирилл/Desktop/ВШЭ дз/АиАЯ/структуры тупорылые/bd/cmake-build-debug/CMakeFiles/test.dir
 C:/Users/Кирилл/Desktop/ВШЭ дз/АиАЯ/структуры тупорылые/bd/cmake-build-debug/CMakeFiles/edit_cache.dir
 C:/Users/Кирилл/Desktop/ВШЭ дз/АиАЯ/структуры тупорылые/bd/cmake-build-debug/CMakeFiles/rebuild_cache.dir

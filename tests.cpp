@@ -9,10 +9,26 @@ bool testAddition() {
     return result == expected;
 }
 
-int main() {
-    bool add = testAddition();
-    std::cout << "testAddition: ";
-    if (add) {std::cout << "OK";}
-    else {std::cout << "FAIL";}
+bool testSubscription() {
+    BigDecimal a ("0.5", 128);
+    BigDecimal b ("3.25", 128);
+    BigDecimal result = a + b;
+    BigDecimal expected ("-2.75", 128);
+    return result == expected;
+}
+
+void runTest(char* message, bool result) {
+    std::cout << message;
+    if (result) {
+        std::cout << "OK";
+    } else {
+        std::cout << "FAIL";
+    }
     std::cout << std::endl;
+}
+
+int main() {
+    //runTest("test addiction: ", testAddition());
+    runTest("test subscription: ", testSubscription());
+    return 0;
 }

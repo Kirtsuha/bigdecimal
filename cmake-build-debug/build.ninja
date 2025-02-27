@@ -41,43 +41,80 @@ include CMakeFiles/rules.ninja
 
 cmake_ninja_workdir = C$:/Users/Кирилл/Desktop/ВШЭ$ дз/АиАЯ/структуры$ тупорылые/bd/cmake-build-debug/
 # =============================================================================
-# Object build statements for EXECUTABLE target bd
+# Object build statements for STATIC_LIBRARY target bigdecimal
 
 
 #############################################
-# Order-only phony target for bd
+# Order-only phony target for bigdecimal
 
-build cmake_object_order_depends_target_bd: phony || .
+build cmake_object_order_depends_target_bigdecimal: phony || .
 
-build CMakeFiles/bd.dir/bigdecimal.cpp.obj: CXX_COMPILER__bd_unscanned_Debug C$:/Users/Кирилл/Desktop/ВШЭ$ дз/АиАЯ/структуры$ тупорылые/bd/bigdecimal.cpp || cmake_object_order_depends_target_bd
-  DEP_FILE = CMakeFiles\bd.dir\bigdecimal.cpp.obj.d
-  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\bd.dir
-  OBJECT_FILE_DIR = CMakeFiles\bd.dir
-
-build CMakeFiles/bd.dir/tests.cpp.obj: CXX_COMPILER__bd_unscanned_Debug C$:/Users/Кирилл/Desktop/ВШЭ$ дз/АиАЯ/структуры$ тупорылые/bd/tests.cpp || cmake_object_order_depends_target_bd
-  DEP_FILE = CMakeFiles\bd.dir\tests.cpp.obj.d
-  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\bd.dir
-  OBJECT_FILE_DIR = CMakeFiles\bd.dir
+build CMakeFiles/bigdecimal.dir/bigdecimal.cpp.obj: CXX_COMPILER__bigdecimal_unscanned_Debug C$:/Users/Кирилл/Desktop/ВШЭ$ дз/АиАЯ/структуры$ тупорылые/bd/bigdecimal.cpp || cmake_object_order_depends_target_bigdecimal
+  DEP_FILE = CMakeFiles\bigdecimal.dir\bigdecimal.cpp.obj.d
+  FLAGS = -g -std=c++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\bigdecimal.dir
+  OBJECT_FILE_DIR = CMakeFiles\bigdecimal.dir
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target bd
+# Link build statements for STATIC_LIBRARY target bigdecimal
 
 
 #############################################
-# Link the executable bd.exe
+# Link the static library libbigdecimal.a
 
-build bd.exe: CXX_EXECUTABLE_LINKER__bd_Debug CMakeFiles/bd.dir/bigdecimal.cpp.obj CMakeFiles/bd.dir/tests.cpp.obj
-  FLAGS = -g
-  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-  OBJECT_DIR = CMakeFiles\bd.dir
+build libbigdecimal.a: CXX_STATIC_LIBRARY_LINKER__bigdecimal_Debug CMakeFiles/bigdecimal.dir/bigdecimal.cpp.obj
+  LANGUAGE_COMPILE_FLAGS = -g
+  OBJECT_DIR = CMakeFiles\bigdecimal.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_FILE = bd.exe
-  TARGET_IMPLIB = libbd.dll.a
-  TARGET_PDB = bd.exe.dbg
+  TARGET_FILE = libbigdecimal.a
+  TARGET_PDB = bigdecimal.a.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target tests
+
+
+#############################################
+# Order-only phony target for tests
+
+build cmake_object_order_depends_target_tests: phony || cmake_object_order_depends_target_bigdecimal
+
+build CMakeFiles/tests.dir/tests.cpp.obj: CXX_COMPILER__tests_unscanned_Debug C$:/Users/Кирилл/Desktop/ВШЭ$ дз/АиАЯ/структуры$ тупорылые/bd/tests.cpp || cmake_object_order_depends_target_tests
+  DEP_FILE = CMakeFiles\tests.dir\tests.cpp.obj.d
+  FLAGS = -g -std=c++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\tests.dir
+  OBJECT_FILE_DIR = CMakeFiles\tests.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target tests
+
+
+#############################################
+# Link the executable tests.exe
+
+build tests.exe: CXX_EXECUTABLE_LINKER__tests_Debug CMakeFiles/tests.dir/tests.cpp.obj | libbigdecimal.a || libbigdecimal.a
+  FLAGS = -g
+  LINK_LIBRARIES = libbigdecimal.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\tests.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = tests.exe
+  TARGET_IMPLIB = libtests.dll.a
+  TARGET_PDB = tests.exe.dbg
+
+
+#############################################
+# Utility command for run-tests
+
+build run-tests: phony CMakeFiles/run-tests tests.exe
+
+
+#############################################
+# Utility command for test
+
+build test: phony CMakeFiles/test run-tests tests.exe
 
 
 #############################################
@@ -102,10 +139,25 @@ build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
 
 build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
+
+#############################################
+# Custom command for CMakeFiles\run-tests
+
+build CMakeFiles/run-tests | ${cmake_ninja_workdir}CMakeFiles/run-tests: CUSTOM_COMMAND || libbigdecimal.a tests.exe
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Кирилл\Desktop\ВШЭ дз\АиАЯ\структуры тупорылые\bd\cmake-build-debug" && "C:\Users\Кирилл\Desktop\ВШЭ дз\АиАЯ\структуры тупорылые\bd\cmake-build-debug\tests.exe""
+
+
+#############################################
+# Phony custom command for CMakeFiles\test
+
+build CMakeFiles/test | ${cmake_ninja_workdir}CMakeFiles/test: phony tests.exe || libbigdecimal.a run-tests tests.exe
+
 # =============================================================================
 # Target aliases.
 
-build bd: phony bd.exe
+build bigdecimal: phony libbigdecimal.a
+
+build tests: phony tests.exe
 
 # =============================================================================
 # Folder targets.
@@ -115,7 +167,7 @@ build bd: phony bd.exe
 #############################################
 # Folder: C:/Users/Кирилл/Desktop/ВШЭ дз/АиАЯ/структуры тупорылые/bd/cmake-build-debug
 
-build all: phony bd.exe
+build all: phony libbigdecimal.a tests.exe
 
 # =============================================================================
 # Built-in targets
