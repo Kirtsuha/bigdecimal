@@ -37,23 +37,3 @@ TEST(BigDecimalTest, Lower) {
     EXPECT_EQ(a < b, 1);
 }
 
-/*TEST(BigDecimalTest, Multiply) {
-    BigDecimal a ("6.25", 2);
-    BigDecimal b("0.75", 2);
-    BigDecimal result = a * b;
-    return 1;
-}*/
-
-/*void runTest(std::string message, bool result) {
-    std::cout << message;
-    if (result) {
-        std::cout << "OK";
-    } else {
-        std::cout << "FAIL";
-    }
-    std::cout << std::endl;
-}
-int main() {
-    std::cout << "OK!!!";
-    return 0;
-}*/
