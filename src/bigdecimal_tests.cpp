@@ -1,7 +1,7 @@
 #include "bigdecimal.h"
 #include <iostream>
 #include <string>
-#include <gtest/gtest.h>
+#include "gtest/gtest.h"
 
 TEST(BigDecimalTest, Addition) {
     BigDecimal a (10, 128);
@@ -53,13 +53,7 @@ TEST(BigDecimalTest, Lower) {
     }
     std::cout << std::endl;
 }
-
 int main() {
-    runTest("test addiction: ", testAddition());
-    runTest("test subscription: ", testSubscription());
-    runTest("test equalisation: ", testIsEqual());
-    runTest("test larger: ", testIsLarger());
-    runTest("test lower: ", testIsLower());
-    testMultiply() ;
+    std::cout << "OK!!!";
     return 0;
 }*/
