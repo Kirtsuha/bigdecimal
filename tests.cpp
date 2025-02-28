@@ -1,5 +1,6 @@
 #include "bigdecimal.h"
 #include <iostream>
+#include <string>
 
 bool testAddition() {
     BigDecimal a (10, 128);
@@ -42,7 +43,7 @@ bool testMultiply() {
     return 1;
 }
 
-void runTest(char* message, bool result) {
+void runTest(std::string message, bool result) {
     std::cout << message;
     if (result) {
         std::cout << "OK";
