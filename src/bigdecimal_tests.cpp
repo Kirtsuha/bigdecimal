@@ -26,9 +26,9 @@ TEST(BigDecimalTest, Equal) {
 }
 
 TEST(BigDecimalTest, Larger) {
-    BigDecimal a (133, 128);
-    BigDecimal b (-23423413, 128);
-    EXPECT_EQ(a > b, 1);
+    BigDecimal a (133, 0);
+    BigDecimal b ("-234.31", 1);
+    EXPECT_EQ(a > b, 1); //check
 }
 
 TEST(BigDecimalTest, Lower) {

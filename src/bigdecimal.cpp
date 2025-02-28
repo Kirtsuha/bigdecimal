@@ -2,7 +2,7 @@
 #include <iostream>
 
 //int constructor
-BigDecimal::BigDecimal(int value, int precision) :  sign(value < 0), precision(precision), bits({}) {
+BigDecimal::BigDecimal(int value, int precision) :  sign(value < 0), precision(precision) {
     if (value == 0) {
         bits = {false};
     } else {
@@ -24,7 +24,7 @@ BigDecimal::BigDecimal(int value, int precision) :  sign(value < 0), precision(p
 };
 
 //double constructor
-BigDecimal::BigDecimal(long double value, int precision) : sign(value < 0), precision(precision), bits({}) {
+BigDecimal::BigDecimal(long double value, int precision) : sign(value < 0), precision(precision) {
     if (value == 0) {
         bits = {false};
     } else {
@@ -83,7 +83,7 @@ int isNull(std::string &s) {
 }
 
 //string constructor
-BigDecimal::BigDecimal(std::string str, int precision) :  sign(str[0] == '-'), precision(precision), bits({}) {
+BigDecimal::BigDecimal(std::string str, int precision) :  sign(str[0] == '-'), precision(precision) {
     size_t dotPos = str.find('.');
     bool hasFractionalPart = dotPos != std::string::npos;
     std::string integerPartStr = str.substr(sign, dotPos - sign);
