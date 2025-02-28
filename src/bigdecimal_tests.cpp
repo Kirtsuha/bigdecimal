@@ -1,49 +1,50 @@
 #include "bigdecimal.h"
 #include <iostream>
 #include <string>
+#include <gtest/gtest.h>
 
-bool testAddition() {
+TEST(BigDecimalTest, Addition) {
     BigDecimal a (10, 128);
     BigDecimal b ("3.75", 128);
     BigDecimal result = a + b;
     BigDecimal expected ("13.75", 128);
-    return result == expected;
+    EXPECT_EQ(result, expected);
 }
 
-bool testSubscription() {
+TEST(BigDecimalTest, Subscription) {
     BigDecimal a = 0.5_longnum;
     BigDecimal b = 3.25_longnum;
     BigDecimal result = a - b;
     BigDecimal expected ("-2.75", 128);
-    return result == expected;
+    EXPECT_EQ(result, expected);
 }
 
-bool testIsEqual() {
+TEST(BigDecimalTest, Equal) {
     BigDecimal a ("133.55", 128);
     BigDecimal b ("133.55", 128);
-    return a == b;
+    EXPECT_EQ(a, b);
 }
 
-bool testIsLarger() {
+TEST(BigDecimalTest, Larger) {
     BigDecimal a ("133.55", 128);
     BigDecimal b ("-23423413.5123125", 128);
-    return a > b;
+    EXPECT_EQ(a, b);
 }
 
-bool testIsLower() {
+TEST(BigDecimalTest, Lower) {
     BigDecimal a ("133.55", 128);
     BigDecimal b ("133.55001", 128);
-    return a < b;
+    EXPECT_EQ(a < b, 1);
 }
 
-bool testMultiply() {
+/*TEST(BigDecimalTest, Multiply) {
     BigDecimal a ("6.25", 2);
     BigDecimal b("0.75", 2);
     BigDecimal result = a * b;
     return 1;
-}
+}*/
 
-void runTest(std::string message, bool result) {
+/*void runTest(std::string message, bool result) {
     std::cout << message;
     if (result) {
         std::cout << "OK";
@@ -61,4 +62,4 @@ int main() {
     runTest("test lower: ", testIsLower());
     testMultiply() ;
     return 0;
-}
+}*/
