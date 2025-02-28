@@ -37,3 +37,9 @@ TEST(BigDecimalTest, Lower) {
     EXPECT_EQ(a < b, 1);
 }
 
+TEST(BigDecimalTest, Multiply) {
+    BigDecimal a ("0.1875", 15);
+    BigDecimal b ("0.25", 5);
+    BigDecimal check ("0.046875", 20);
+    EXPECT_EQ(a*b, check);
+}

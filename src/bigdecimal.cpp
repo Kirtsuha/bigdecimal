@@ -324,18 +324,32 @@ BigDecimal BigDecimal::operator-(const BigDecimal& other) const {
 
 //multiply operator
 BigDecimal BigDecimal::operator*(const BigDecimal& other) const {
-    BigDecimal temp = other;
+    BigDecimal temp;
+    temp.bits = other.bits;
     temp.sign = 0;
-    temp.precision = precision + other.precision;
-    BigDecimal result (0,0);
+    temp.precision = 0;
+
+    BigDecimal result (0, 0);
     std::vector<bool> trail = bits;
     std::reverse(trail.begin(), trail.end());
+    //std::cout << result.toString() << " " << temp.toString() << " " << temp.precision << std::endl;
+    //std::cout << '!' << std::endl;
     for (size_t i = 0; i < trail.size(); i++) {
-        result = result + temp;
-        temp.precision--;
-        std::cout << result.toString() << std::endl;
+        if (trail[i]) {
+            result = result + temp;
+        }
+        temp.bits.push_back(false);
+        //std::cout << i << " " << result.toString() << std::endl;
     }
     result.precision = precision + other.precision;
+    if (result.bits.size() < size_t(result.precision)) {
+        std::reverse(result.bits.begin(), result.bits.end());
+        while (result.bits.size() < size_t(result.precision)) {
+            result.bits.push_back(false);
+        }
+        std::reverse(result.bits.begin(), result.bits.end());
+    }
+
     result.sign = (sign != other.sign);
     return result;
 }
