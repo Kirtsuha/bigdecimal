@@ -9,9 +9,9 @@
 
 class BigDecimal {
 private:
-    bool sign = false;
-    std::vector<bool> bits;
-    int precision;
+    bool sign = false;        
+    int precision;             
+    std::vector<bool> bits; 
 
 public:
     BigDecimal(int value = 0, int precision = 0);

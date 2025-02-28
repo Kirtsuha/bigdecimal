@@ -22,13 +22,13 @@ TEST(BigDecimalTest, Subscription) {
 TEST(BigDecimalTest, Equal) {
     BigDecimal a ("133.55", 128);
     BigDecimal b ("133.55", 128);
-    EXPECT_EQ(a, b);
+    EXPECT_EQ(a == b, 1);
 }
 
 TEST(BigDecimalTest, Larger) {
-    BigDecimal a ("133.55", 128);
-    BigDecimal b ("-23423413.5123125", 128);
-    EXPECT_EQ(a, b);
+    BigDecimal a (133, 128);
+    BigDecimal b (-23423413, 128);
+    EXPECT_EQ(a > b, 1);
 }
 
 TEST(BigDecimalTest, Lower) {

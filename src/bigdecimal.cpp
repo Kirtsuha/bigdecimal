@@ -2,7 +2,7 @@
 #include <iostream>
 
 //int constructor
-BigDecimal::BigDecimal(int value, int precision) : precision(precision), sign(value < 0) {
+BigDecimal::BigDecimal(int value, int precision) :  sign(value < 0), precision(precision), bits({}) {
     if (value == 0) {
         bits = {false};
     } else {
@@ -24,7 +24,7 @@ BigDecimal::BigDecimal(int value, int precision) : precision(precision), sign(va
 };
 
 //double constructor
-BigDecimal::BigDecimal(long double value, int precision) : precision(precision), sign(value < 0) {
+BigDecimal::BigDecimal(long double value, int precision) : sign(value < 0), precision(precision), bits({}) {
     if (value == 0) {
         bits = {false};
     } else {
@@ -52,7 +52,7 @@ BigDecimal::BigDecimal(long double value, int precision) : precision(precision),
 //utility function to divide string by 2 with remainder
 int StringDel2(std::string &s) {
     int temp = 0;
-    for (int i = 0; i < s.size(); i++) {
+    for (size_t i = 0; i < s.size(); i++) {
         temp = temp * 10 + (s[i] - '0');
         s[i] = temp / 2 + '0';
         temp %= 2;
@@ -74,7 +74,7 @@ int StringMul2(std::string &s) {
 
 //string checker
 int isNull(std::string &s) {
-    for (int i = 0; i < s.size(); i++) {
+    for (size_t i = 0; i < s.size(); i++) {
         if (s[i] != '0') {
             return 0;
         }
@@ -83,7 +83,7 @@ int isNull(std::string &s) {
 }
 
 //string constructor
-BigDecimal::BigDecimal(std::string str, int precision) : precision(precision), sign(str[0] == '-') {
+BigDecimal::BigDecimal(std::string str, int precision) :  sign(str[0] == '-'), precision(precision), bits({}) {
     size_t dotPos = str.find('.');
     bool hasFractionalPart = dotPos != std::string::npos;
     std::string integerPartStr = str.substr(sign, dotPos - sign);
@@ -103,7 +103,7 @@ BigDecimal::BigDecimal(std::string str, int precision) : precision(precision), s
 }
 
 //copy constructor
-BigDecimal::BigDecimal(const BigDecimal &other) : bits(other.bits), precision(other.precision), sign(other.sign) {}
+BigDecimal::BigDecimal(const BigDecimal &other) : sign(other.sign), precision(other.precision), bits(other.bits) {}
 
 //destructor
 BigDecimal::~BigDecimal() {}
@@ -122,7 +122,7 @@ BigDecimal &BigDecimal::operator=(const BigDecimal &other) {
 void BigDecimal::normalize() {
     std::vector<bool> temp = (*this).bits;
     std::reverse(temp.begin(), temp.end());
-    for (int i = 0; i < (*this).bits.size() - (*this).precision - 1; i++) {
+    for (size_t i = 0; i < (*this).bits.size() - (*this).precision - 1; i++) {
         if (temp[temp.size()-1] == false) {
             temp.pop_back();
         } else {
@@ -203,7 +203,7 @@ BigDecimal operator""_longnum(long double number) {
 std::string BigDecimal::toString() const {
     std::string result;
     if (sign) result += '-';
-    for (int i = 0; i < bits.size(); i++) {
+    for (size_t i = 0; i < bits.size(); i++) {
         result += std::to_string(bits[i]);
         if (i == bits.size() - precision - 1) result += '.';
     }
@@ -234,7 +234,7 @@ std::vector<bool> absolute_plus(std::vector<bool> x, std::vector<bool> y) {
     int last = 0;
     int temp = 0;
 
-    for (int i = 0 ; i < x.size(); i++) {
+    for (size_t i = 0 ; i < x.size(); i++) {
         temp = last + x[i] + y[i];
         last = temp / 2;
         new_bits.push_back(temp % 2);
@@ -252,7 +252,7 @@ std::vector<bool> absolute_minus(std::vector<bool> x, std::vector<bool> y) {
     int borrow = 0;
     int temp = 0;
 
-    for (int i = 0; i < x.size(); i++) {
+    for (size_t i = 0; i < x.size(); i++) {
         if (borrow == 1) {
             if (x[i] == 0) {
                 temp = 1;
@@ -330,7 +330,7 @@ BigDecimal BigDecimal::operator*(const BigDecimal& other) const {
     BigDecimal result (0,0);
     std::vector<bool> trail = bits;
     std::reverse(trail.begin(), trail.end());
-    for (int i = 0; i < trail.size(); i++) {
+    for (size_t i = 0; i < trail.size(); i++) {
         result = result + temp;
         temp.precision--;
         std::cout << result.toString() << std::endl;
