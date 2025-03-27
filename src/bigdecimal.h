@@ -9,12 +9,12 @@
 #include <algorithm>
 
 class BigDecimal {
-private:
+public:
     bool sign = false;        
     int precision;             
     std::vector<bool> bits; 
 
-public:
+//public:
     BigDecimal(int value = 0, int precision = 0);
     BigDecimal(long double value, int precision);
     BigDecimal(std::string value, int precision);
@@ -38,7 +38,7 @@ public:
     BigDecimal operator/(const BigDecimal & other) const;
 
     int compareMagnitude(const BigDecimal& other) const;
-    void setPrecision(int newPrecision);
+    void simplify();
     void normalize();
     void alignPrecision(const BigDecimal & other);
 

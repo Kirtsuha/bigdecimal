@@ -38,7 +38,7 @@ void test_larger() {
 
 void test_lower() {
     BigDecimal a ("133.55", 128);
-    BigDecimal b ("133.55001", 128);
+    BigDecimal b ("133.5500000000000000001");
     assert(a < b);
     std::cout << "test_lower: OK" << std::endl;
 }

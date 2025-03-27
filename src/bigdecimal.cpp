@@ -255,14 +255,25 @@ bool BigDecimal::operator!=(const BigDecimal &other) const {
 
 
 int BigDecimal::compareMagnitude(const BigDecimal& other) const {
-    if (bits.size() > other.bits.size()) return 1;
-    if (bits.size() < other.bits.size()) return -1;
+    std::vector<bool> left = bits;
+    std::vector<bool> right = other.bits;
+    
+    if (left.size() > right.size()) return 1;
+    if (left.size() < right.size()) return -1;
 
-    for (size_t i = bits.size(); i > 0; --i) {
-        if (bits[i - 1] > other.bits[i - 1]) return 1;
-        if (bits[i - 1] < other.bits[i - 1]) return -1;
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    for (size_t i = 0; i < left.size(); i++) {
+        if (left[i] > right[i]) return 1;
+        if (left[i] < right[i]) return -1;
     }
     return 0;
+}
+
+void BigDecimal::simplify() {
+    while (bits[bits.size()-1] == false) {
+        bits.pop_back();
+        precision--;
+    }
 }
 
 //less operator
