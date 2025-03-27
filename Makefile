@@ -1,29 +1,25 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -O2
+CXXFLAGS = -std=c++20 -Wall -O3
+SRCDIR = src
+TESTDIR = tests
+BINDIR = bin
 
-GTEST_DIR = googletest/googletest
+all: $(BINDIR)/pi
 
-CXXFLAGS += -I./googletest/googletest/include -I$(GTEST_DIR)
+$(BINDIR)/pi: $(SRCDIR)/main.o $(SRCDIR)/bigdecimal.o
+	$(CXX) $(CXXFLAGS) -o $@ $^
 
-all: test
+$(TESTDIR)/bigdecimal_tests: $(TESTDIR)/bigdecimal_tests.o $(SRCDIR)/bigdecimal.o
+	$(CXX) $(CXXFLAGS) -o $@ $^
 
-test: bigdecimal_tests.o bigdecimal.o gtest_main.o gtest-all.o
-	$(CXX) $(CXXFLAGS) -o test $^ -lpthread
-	./test
+$(SRCDIR)/%.o: $(SRCDIR)/%.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-bigdecimal.o: src/bigdecimal.cpp src/bigdecimal.h
-	$(CXX) $(CXXFLAGS) -c src/bigdecimal.cpp
-
-bigdecimal_tests.o: src/bigdecimal_tests.cpp src/bigdecimal.h
-	$(CXX) $(CXXFLAGS) -c src/bigdecimal_tests.cpp
-
-gtest-all.o: $(GTEST_DIR)/src/gtest-all.cc
-	$(CXX) $(CXXFLAGS) -c $(GTEST_DIR)/src/gtest-all.cc
-
-gtest_main.o: $(GTEST_DIR)/src/gtest_main.cc
-	$(CXX) $(CXXFLAGS) -c $(GTEST_DIR)/src/gtest_main.cc
+$(TESTDIR)/%.o: $(TESTDIR)/%.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+	
+test: $(TESTDIR)/bigdecimal_tests
+	$(TESTDIR)/bigdecimal_tests
 
 clean:
-	rm -f *.o test
-
-.PHONY: all test clean
+	rm -f $(SRCDIR)/*.o $(TESTDIR)/*.o $(BINDIR)/pi $(TESTDIR)/bigdecimal_tests

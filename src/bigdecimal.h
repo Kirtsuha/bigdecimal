@@ -1,3 +1,4 @@
+#pragma once
 
 #ifndef BIGDECIMAL_H
 #define BIGDECIMAL_H
@@ -17,6 +18,10 @@ public:
     BigDecimal(int value = 0, int precision = 0);
     BigDecimal(long double value, int precision);
     BigDecimal(std::string value, int precision);
+
+    BigDecimal(long double value);
+    BigDecimal(std::string value);
+    
     BigDecimal(const BigDecimal& other);
     ~BigDecimal();
 
@@ -30,7 +35,7 @@ public:
     BigDecimal operator+(const BigDecimal & other) const;
     BigDecimal operator-(const BigDecimal & other) const;
     BigDecimal operator*(const BigDecimal & other) const;
-    BigDecimal operator/(BigDecimal & other);
+    BigDecimal operator/(const BigDecimal & other) const;
 
     int compareMagnitude(const BigDecimal& other) const;
     void setPrecision(int newPrecision);
