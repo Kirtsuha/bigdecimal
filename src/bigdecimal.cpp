@@ -306,6 +306,18 @@ std::string BigDecimal::toString() const {
     }
     return result;
 }
+long double BigDecimal::toDouble() const {
+    long double ans = 0;
+    long double two = pow(2, bits.size() - precision - 1);
+    for (int i = 0; i < bits.size(); i++) {
+        ans += bits[i] * two;
+        two /= 2;
+    }
+    if (sign) {
+        ans *= -1;
+    }
+    return ans;
+}
 /*
 void equalize(std::vector<bool> *x, std::vector<bool> *y, int x_precision, int y_precision) {
     for (int i = 0; i < x_precision - y_precision; i++) { //x_precision > y_precision
