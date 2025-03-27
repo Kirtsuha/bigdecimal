@@ -52,11 +52,12 @@ void test_multiply() {
 }
 
 void test_divide() {
-    BigDecimal a ("123", 15);
-    BigDecimal b ("3");
+    BigDecimal a ("123", 4);
+    BigDecimal d ("3", 7);
+    BigDecimal z = a/d;
+    
     BigDecimal check ("41");
-    //assert(a/b == check);
-    std::cout << (a/b).toString() << std::endl;
+    assert(z == check);
     std::cout << "test_divide: OK" << std::endl;
 }
 

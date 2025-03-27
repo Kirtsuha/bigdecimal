@@ -378,7 +378,6 @@ std::vector<bool> absolute_minus(std::vector<bool> x, std::vector<bool> y) {
         b.push_back(false);
     }
     
-    std::cout << std::endl;
 
     for (size_t i = 0; i < a.size(); i++) {
         if (borrow == 1) {
@@ -504,7 +503,12 @@ BigDecimal BigDecimal::operator/(const BigDecimal& other) const {
     BigDecimal divisor = other;
     divisor.precision = 0;
     BigDecimal divided = *this;
-    divided.precision = 0;
+    divided.precision = precision;
+    for (int i = 0; i < other.precision; i++) {
+        divisor.bits.push_back(false);
+        divided.bits.push_back(false);
+    }
+
     divisor.sign = false;
     divided.sign = false;
 
@@ -513,33 +517,31 @@ BigDecimal BigDecimal::operator/(const BigDecimal& other) const {
     temp.precision = 0;
     temp.sign = false;
     BigDecimal result = temp;
-    std::cout << divisor.toString() << std::endl;
+    //std::cout << divisor.toString() << std::endl;
     int point = 0;
 
-    for (size_t i = 0; i < (*this).bits.size() + other.bits.size(); i++) {
-        std::cout << i << ": " << temp.toString() << " ~ " << result.toString() << std::endl;
+    //std::cout << ": " << divided.toString() << " !!! " << divisor.toString() << std::endl;
+    for (size_t i = 0; i < divisor.bits.size() + divided.bits.size(); i++) {
+        //std::cout << i << ": " << temp.toString() << " ~ " << result.toString() << std::endl;
         if (i < divided.bits.size()) {
             temp.bits.push_back(divided.bits[i]);
         } else {
             temp.bits.push_back(false);
             point++;
         }
-        std::cout << i << ": " << temp.toString() << " + " << result.toString() << std::endl;
         BigDecimal x = temp;
         x.normalize();
         if (x < divisor) {
-            std::cout << "less";
             result.bits.push_back(false);
         } else {
             temp = temp - divisor;
             result.bits.push_back(true);
         }
     }
-    BigDecimal check = result * other;
-    std::cout << "!" << check.toString() << std::endl;
     result.sign = (sign != other.sign);
-    result.precision = precision + other.precision;
 
+    result.precision = precision + other.bits.size();
+    //std::cout << result.precision << " " << result.bits.size() << " " << precision << " " <<  other.precision << " " << (*this).bits.size() << " " <<  other.bits.size() << std::endl;
     result.normalize();
     return result;
 }
